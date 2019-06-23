@@ -1,0 +1,63 @@
+{
+  "script_explanations": {
+    "tslint": "Run tslint on source",
+    "clean": "Delete generated dsitribution files",
+    "build": "Build debug version",
+    "build-release": "Build release version",
+    "clean-build": "Clean and build",
+    "test": "Run all tests",
+    "custom-task": "Run custom task locally",
+    "clean-task": "Delete task installation from test account",
+    "publish-task": "Publish local task build to test account",
+    "clean-publish-pa": "Delete and publish local task",
+    "package-extension": "Package task in an extensions",
+    "publish-extension": "Publish task build as an extension",
+    "devext": "Inner loop command for continuously building and publishing extension. (Use in conjunction with: \"export DEV_PATCH=$(($DEV_PATCH+1)) && npm run devext\")"
+  },
+  "scripts": {
+    "tslint": "tslint --project tsconfig.json --fix --config tslint.json",
+    "clean": "rm -rf dist",
+    "build": "npm run tslint && webpack --config=webpack.config.js --env debug",
+    "build-release": "npm run clean && npm run tslint && webpack --config=webpack.config.js --env release",
+    "clean-build": "npm run clean && npm run build",
+    "test": "webpack --config=webpack.config.js --env test-suite && node --no-deprecation node_modules/mocha/bin/_mocha --timeout 600000 dist/tests/main.js",
+    "custom-task": "node --no-deprecation dist/custom-task/main.js",
+    "clean-task": "tfx build tasks delete --task-id {{task_guid}} --token %ADO_PAT% --service-url %ADO_COLLECTION_URI%",
+    "publish-task": "tfx build tasks upload --task-path dist/custom-task --overwrite --token %ADO_PAT% --service-url %ADO_COLLECTION_URI%",
+    "clean-publish-pa": "npm run clean-task && npm run publish-task",
+    "package-dev-extension": "cd dist/ado-extension && tfx extension create --manifest-globs manifest.json --override \"{\\\"version\\\":\\\"2.0.%DEV_PATCH%\\\"}\" && cd ../../",
+    "publish-dev-extension": "tfx extension publish --vsix dist/{{publisher}}.{{extension_name}}-0.0.%DEV_PATCH%.vsix --share-with %ADO_ACCOUNT% --token %ADO_PAT%",
+    "devext": "npm run clean-build && npm run package-dev-extension && npm run publish-dev-extension"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.14",
+    "@types/q": "^1.5.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "file-loader": "^2.0.0",
+    "mocha": "^5.2.0",
+    "replace-in-file-webpack-plugin": "^1.0.6",
+    "string-replace-loader": "^2.1.1",
+    "tfx-cli": "^0.6.3",
+    "ts-loader": "^5.3.0",
+    "ts-mockito": "^2.3.1",
+    "tslint": "^5.15.0",
+    "tslint-loader": "3.5.4",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "name": "azure-pipelines-custom-task",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "azure-devops-node-api": "^7.2.0",
+    "azure-pipelines-task-lib": "^2.7.0"
+  }
+}

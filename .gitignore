@@ -1,0 +1,8 @@
+node_modules
+dist
+/**/.vsix
+/.vs
+/**/.taskkey
+/**/*.vsix
+/**/*.zip
+.DS_Store
