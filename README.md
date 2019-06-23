@@ -1,2 +1,8 @@
 # azure-pipelines-task-template
-Starter template for creating a custom azure pipelines task
+
+![Azure Pipelines](./images/azure-pipelines.png)
+
+## Introduction
+
+This repository contains a template to quick-start creation of a custom azure pipelines task written in TypeScript.
+

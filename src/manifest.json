@@ -1,0 +1,44 @@
+{
+    "manifestVersion": 1.0,
+    "id": "MyCustomExtension{{tag}}",
+    "name": "My Custom Extension {{tag}}",
+    "icons": {
+        "default": "icon.png"
+    },
+    "version": "{{version}}",
+    "description": "This extension contains a custom build and release task.",
+    "publisher": "{{publisher}}",
+    "public": false,
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "custom-task"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "custom-task",
+            "addressable": true,
+            "packagePath": "custom-task"
+        }
+    ]
+}

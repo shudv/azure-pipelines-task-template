@@ -1,0 +1,37 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "one-line": false,
+        "ordered-imports": true,
+        "arrow-parens": false,
+        "no-console": false,
+        "object-literal-sort-keys": false,
+        "max-classes-per-file": [
+            true,
+            10
+        ],
+        "max-line-length": [
+            true,
+            120
+        ],
+        "no-empty": false,
+        "curly": [
+            true,
+            "ignore-same-line"
+        ],
+        "trailing-comma": [
+            true,
+            {
+                "singleline": "never",
+                "multiline": {
+                    "objects": "ignore",
+                    "arrays": "always",
+                    "functions": "never",
+                    "typeLiterals": "ignore"
+                }
+            }
+        ]
+    }
+}
