@@ -1,0 +1,11 @@
+name: 2.$(Date:yyyyMMdd).$(Rev:r)
+
+pool:
+  name: Hosted VS2017
+  demands: npm
+
+trigger:
+- master
+
+steps:
+- template: build.yml

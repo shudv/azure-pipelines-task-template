@@ -1,5 +1,5 @@
 {
-    "manifestVersion": 1.0,
+    "manifestVersion": 1,
     "id": "MyCustomExtension{{tag}}",
     "name": "My Custom Extension {{tag}}",
     "icons": {
@@ -37,8 +37,7 @@
     "files": [
         {
             "path": "custom-task",
-            "addressable": true,
-            "packagePath": "custom-task"
+            "addressable": true
         }
     ]
 }
