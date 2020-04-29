@@ -9,8 +9,14 @@
         "resolveJsonModule": true,
         "target": "ES6",
         "lib": [
-            "es6"
-        ]
+            "es6",
+            "es2017"
+        ],
+        "types": [
+            "jest",
+            "node"
+        ],
+        "typeRoots": ["./src/types", "node_modules/@types"],
     },
     "include": [
         "src/**/*.ts",

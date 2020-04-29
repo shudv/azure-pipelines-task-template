@@ -1,0 +1,56 @@
+steps:
+- powershell: |
+   Write-Host '##vso[task.setvariable variable=BUILD_ENV]production'
+  displayName: "Set build environment"
+
+- task: Npm@1
+  displayName: 'npm install'
+
+- task: Npm@1
+  displayName: 'Run tslint'
+  inputs:
+    command: custom
+    customCommand: 'run tslint'
+
+- task: Npm@1
+  displayName: 'Run tests'
+  inputs:
+    command: custom
+    customCommand: 'run test'
+
+- task: Npm@1
+  displayName: 'Run build'
+  inputs:
+    command: custom
+    customCommand: 'run build'
+
+- task: PublishTestResults@2
+  displayName: 'Publish test results report'
+  inputs:
+    testResultsFormat: 'XUnit'
+    testResultsFiles: '**/test-*.xml'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: 'coverage/cobertura-coverage.xml'
+    failIfCoverageEmpty: true
+
+# Replace the version placeholder in built files with the current build number
+- task: Bash@3
+  displayName: 'Set version string'
+  inputs:
+    targetType: 'inline'
+    script: grep -rl '{{version}}' dist | xargs --verbose sed -i 's/{{version}}/$(Build.BuildNumber)/g'
+
+- task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
+  displayName: 'Package extension'
+  inputs:
+    rootFolder: dist
+    patternManifest: manifest.json
+    outputPath: '$(Build.StagingDirectory)/extension-$(Build.BuildId).vsix'
+    bypassLocalValidation: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifact'
