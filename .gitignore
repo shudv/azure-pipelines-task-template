@@ -6,3 +6,8 @@ dist
 /**/*.vsix
 /**/*.zip
 .DS_Store
+npm-debug.log
+coverage
+test-report.xml
+test-report.html
+test-report.json
