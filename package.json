@@ -10,7 +10,7 @@
     "start": "node --no-deprecation dist/custom-task/main.js",
     "clean:task": "tfx build tasks delete --task-id {{put_task_guid_here}} --token %ADO_PAT% --service-url %ADO_ACCOUNT_URI%",
     "publish:task": "tfx build tasks upload --task-path dist/custom-task --overwrite --token %ADO_PAT% --service-url %ADO_ACCOUNT_URI%",
-    "clean:publish:task": "npm run clean:pa && npm run publish:pa",
+    "clean:publish:task": "npm run clean:task && npm run publish:task",
     "package": "cd dist && tfx extension create --manifest-globs base.json %BUILD_ENV%.json --output-path %BUILD_ENV%.vsix --publisher %DEV_PUBLISHER% && cd ../",
     "publish": "tfx extension publish --vsix dist/ado-extension/%BUILD_ENV%.vsix --token %ADO_PAT%",
     "dev": "npm run build && npm run package && npm run publish && npm run clean:publish:task",
