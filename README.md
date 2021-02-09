@@ -4,7 +4,12 @@
 
 ## Introduction
 
-This repository contains a quick start template for creating and publishning a custom azure pipelines task written in TypeScript. It uses [webpack](https://webpack.js.org) to bundle scripts and is configured to use [jest](https://jestjs.io/) to run tests.
+This repository contains a quick start template for creating and publishing a custom azure pipelines task written in TypeScript. It uses [webpack](https://webpack.js.org) to bundle scripts and is configured to use [jest](https://jestjs.io/) to run tests. Note that this only works on Windows platform as of now.
+
+## Main features
+1. Contains all pieces for the development workflow for a pipeline task - local building/testing/packaging and AzureDevOps based CI and PR validation pipelines.
+
+1. Timestamp based versioning - Standard workflows require you to maintain a version file for your extension and task which is okay for small/medium scale development. Although dynamic versioning is a must if more than one developer needs to work on an extension and frees developers from one thing that needs to be managed by hand. 
 
 ## Getting started
 
@@ -32,5 +37,9 @@ There are a few small steps that need to be carried out before you can start usi
 
 | What changed? | Which NPM command to run? | What it does? |
 | ------------- |:-------------:|:----- |
-| Task implementation | `npm run dev:task` | Build, package and update policy task without updating extension |
-| Anything else | `npm run dev` | Build, package and publish full extension |
+| Task implementation | `npm run dev:task` | Build, package and update custom task without updating extension *(Faster)* |
+| Anything else | `npm run dev` | Build, package and publish full extension *(Slower)* |
+
+## Questions/Issues?
+
+It is possible that this template does not work out of the box in your specific environment. This can happen because of multiple reasons. I would love to know the issues faced so that I can submit corresponding fixes. Please create a GitHub issue describing your problem.
